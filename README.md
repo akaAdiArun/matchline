@@ -2,6 +2,8 @@
 
 Matchline compares one item across a supplier invoice, a purchase order, and a delivery receipt. It reports its decision, the reason, and the values read from each document. See [the project roadmap](docs/PROJECT.md) for the full invoice auditor.
 
+**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Replay three recorded invoice decisions.
+
 ## Recorded demo on Windows
 
 From PowerShell, clone the repository and start a local server from its root.
