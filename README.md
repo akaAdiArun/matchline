@@ -2,7 +2,11 @@
 
 Matchline compares one item across a supplier invoice, a purchase order, and a delivery receipt. It reports its decision, the reason, and the values read from each document. See [the project roadmap](docs/PROJECT.md) for the full invoice auditor.
 
-**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Replay three recorded invoice decisions.
+**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Recorded demo with three saved invoice decisions.
+
+![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
+
+On **12 synthetic invoices**, Qwen3-VL-2B produced **11/12 correct matching decisions** versus **7/12 for Tesseract plus parsing**. Median scan-to-decision latency was **617 ms versus 137 ms**, respectively. See the [benchmark method, reproduction steps, and failure examples](evaluation/README.md).
 
 ## Recorded demo on Windows
 
@@ -15,8 +19,6 @@ python -m http.server 8000 --bind 127.0.0.1
 ```
 
 If you already have the repository checked out, run just the server command. Open [the local demo](http://127.0.0.1:8000/demo/) in a browser. The demo uses recorded pipeline outputs and runs with Python alone. Select a case, then click an extracted field to highlight its OCR location when one is available.
-
-![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
 
 The demo loads the [original benchmark results](evaluation/results.json) for its comparison. To regenerate the three recordings after [setting up the real OCR pipeline](#match-a-scanned-invoice-on-windows), run `python -m demo.record` from the repository root. The bundled Inter font is covered by the [SIL Open Font License](demo/fonts/OFL.txt).
 
@@ -88,10 +90,6 @@ python -m unittest discover -s tests -v
 ```
 
 The scan tests run the installed Tesseract against the checked-in PNGs, including a separate scan where only the quantity is obscured. They are skipped if the executable is unavailable. The matching and parser tests run independently.
-
-## Compare Tesseract and local vision
-
-The small synthetic evaluation compares the existing OCR parser with Qwen3-VL-2B on 12 held-out images. See the [benchmark setup, results, and failure examples](evaluation/README.md) for the Windows commands and per-document evidence.
 
 ## Input and decision rules
 
