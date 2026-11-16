@@ -1,8 +1,10 @@
 # Matchline
 
-Matchline compares one item across a supplier invoice, a purchase order, and a delivery receipt. It reports its decision, the reason, and the values read from each document. See [the project roadmap](docs/PROJECT.md) for the full invoice auditor.
+Matchline helps you check a supplier’s bill before you pay it. It compares what you were billed for with what you ordered and what actually arrived.
 
-**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Recorded demo with three saved invoice decisions.
+If the bill says 100 items and only 60 arrived, Matchline flags the 40 missing items and shows the numbers behind its decision. If it can’t read a number, it asks someone to check it.
+
+**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Recorded demo with three sample invoices you can explore in your browser.
 
 ![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
 
@@ -22,7 +24,7 @@ If you already have the repository checked out, run just the server command. Ope
 
 The demo loads the [original benchmark results](evaluation/results.json) for its comparison. To regenerate the three recordings after [setting up the real OCR pipeline](#match-a-scanned-invoice-on-windows), run `python -m demo.record` from the repository root. The bundled Inter font is covered by the [SIL Open Font License](demo/fonts/OFL.txt).
 
-Start with [matching.py](matching.py) for the decision rules and [invoice_ocr.py](invoice_ocr.py) for scan extraction. [matchline.py](matchline.py) connects the two and prints the result as JSON.
+Start with [matching.py](matching.py) for the decision rules and [invoice_ocr.py](invoice_ocr.py) for scan extraction. [matchline.py](matchline.py) connects the two and prints the result as JSON. See the [project roadmap](docs/PROJECT.md) for the full plan.
 
 ## Run the examples
 
