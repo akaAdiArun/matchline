@@ -71,6 +71,10 @@ python -m unittest discover -s tests -v
 
 The scan tests run the installed Tesseract against the checked-in PNGs, including a separate scan where only the quantity is obscured. They are skipped if the executable is unavailable. The matching and parser tests run independently.
 
+## Compare Tesseract and local vision
+
+The small synthetic evaluation compares the existing OCR parser with Qwen3-VL-2B on 12 held-out images. See the [benchmark setup, results, and failure examples](evaluation/README.md) for the Windows commands and per-document evidence.
+
 ## Input and decision rules
 
 Pass three UTF-8 JSON objects as separate files in invoice, purchase order, delivery receipt order. Each object represents one line item and has an `item_id` (a nonblank string) and a `quantity` (a non-negative JSON integer). The invoice and purchase order also have a `unit_price` (a finite, non-negative JSON number). The two prices are assumed to be in the same currency. The program compares prices exactly and prints them as decimal strings.

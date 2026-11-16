@@ -40,13 +40,8 @@ def main():
     except (OSError, ValueError) as error:
         parser.error(str(error))
 
-    decision = match(invoice, order, receipt)
+    decision = match(invoice, order, receipt, require_invoice_number=args.invoice_image)
     if extraction is not None:
-        if invoice["invoice_number"] is None:
-            reason = "Invoice number is missing or unreadable."
-            if decision["status"] == "needs_review":
-                reason += " " + decision["reason"]
-            decision.update(status="needs_review", reason=reason)
         decision["invoice_extraction"] = extraction
 
     print(json.dumps(decision, indent=2, default=str))

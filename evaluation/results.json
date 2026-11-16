@@ -1,0 +1,849 @@
+{
+  "benchmark": "held-out synthetic invoices",
+  "tesseract": {
+    "metrics": {
+      "field_accuracy": {
+        "correct": 25,
+        "total": 48
+      },
+      "by_field": {
+        "invoice_number": {
+          "correct": 6,
+          "total": 12
+        },
+        "item_id": {
+          "correct": 6,
+          "total": 12
+        },
+        "quantity": {
+          "correct": 6,
+          "total": 12
+        },
+        "unit_price": {
+          "correct": 7,
+          "total": 12
+        }
+      },
+      "readable_fields": {
+        "correct": 23,
+        "total": 46
+      },
+      "unreadable_fields": {
+        "correct": 2,
+        "total": 2
+      },
+      "decision_accuracy": {
+        "correct": 7,
+        "total": 12
+      },
+      "incorrect_matches": {
+        "count": 0,
+        "should_not_match": 7
+      },
+      "review": {
+        "count": 7,
+        "total": 12
+      },
+      "median_ms": 136.5
+    },
+    "documents": [
+      {
+        "image": "01.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "BA-6127",
+          "item_id": "BOLT-317",
+          "quantity": 24,
+          "unit_price": "8.75"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "BA-6127",
+            "item_id": "BOLT-317",
+            "quantity": 24,
+            "unit_price": "8.75"
+          },
+          "issues": {},
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: BA-6127"
+            ],
+            "item_id": [
+              "Item ID: BOLT-317"
+            ],
+            "quantity": [
+              "Quantity: 24"
+            ],
+            "unit_price": [
+              "Unit price: $8.75"
+            ]
+          }
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 127.05
+      },
+      {
+        "image": "02.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "VV-2847",
+          "item_id": "TUBE-642",
+          "quantity": 84,
+          "unit_price": "11.65"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "VV-2847",
+            "item_id": "TUBE-642",
+            "quantity": 84,
+            "unit_price": "11.65"
+          },
+          "issues": {},
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: VV-2847"
+            ],
+            "item_id": [
+              "Item ID: TUBE-642"
+            ],
+            "quantity": [
+              "Quantity: 84"
+            ],
+            "unit_price": [
+              "Unit price: $11.65"
+            ]
+          }
+        },
+        "status": "mismatch",
+        "reason": "35 units billed but not received (84 billed, 49 received).",
+        "latency_ms": 131.33
+      },
+      {
+        "image": "03.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "KF-7163",
+          "item_id": "MOTOR-249",
+          "quantity": 36,
+          "unit_price": "7.40"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "KF-7163",
+            "item_id": "MOTOR-249",
+            "quantity": 36,
+            "unit_price": "7.40"
+          },
+          "issues": {},
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: KF-7163"
+            ],
+            "item_id": [
+              "Item ID: MOTOR-249"
+            ],
+            "quantity": [
+              "Quantity: 36"
+            ],
+            "unit_price": [
+              "Unit price: $7.40"
+            ]
+          }
+        },
+        "status": "mismatch",
+        "reason": "Invoice unit price 7.40 differs from purchase order unit price 7.04.",
+        "latency_ms": 141.66
+      },
+      {
+        "image": "04.png",
+        "layout": "labels",
+        "condition": "low resolution and faint ink",
+        "expected_fields": {
+          "invoice_number": "GD-9084",
+          "item_id": "CLAMP-652",
+          "quantity": 46,
+          "unit_price": "3.26"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "GD-9084",
+            "item_id": "CLAMP-652",
+            "quantity": 46,
+            "unit_price": "3.26"
+          },
+          "issues": {},
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: GD-9084"
+            ],
+            "item_id": [
+              "Item ID: CLAMP-652"
+            ],
+            "quantity": [
+              "Quantity: 46"
+            ],
+            "unit_price": [
+              "Unit price: $3.26"
+            ]
+          }
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 120.75
+      },
+      {
+        "image": "05.png",
+        "layout": "labels",
+        "condition": "skewed and blurred",
+        "expected_fields": {
+          "invoice_number": "HT-3156",
+          "item_id": "GASKET-378",
+          "quantity": 12,
+          "unit_price": "9.60"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "HT-3156",
+            "item_id": "GASKET-378",
+            "quantity": 12,
+            "unit_price": "9.60"
+          },
+          "issues": {},
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: HT-3156"
+            ],
+            "item_id": [
+              "Item ID: GASKET-378"
+            ],
+            "quantity": [
+              "Quantity: 12"
+            ],
+            "unit_price": [
+              "Unit price: $9.60"
+            ]
+          }
+        },
+        "status": "mismatch",
+        "reason": "Invoice quantity 12 differs from purchase order quantity 21. 9 units received but not billed (21 received, 12 billed).",
+        "latency_ms": 121.99
+      },
+      {
+        "image": "06.png",
+        "layout": "labels",
+        "condition": "quantity covered",
+        "expected_fields": {
+          "invoice_number": "PW-4936",
+          "item_id": "STRAP-627",
+          "quantity": null,
+          "unit_price": "17.35"
+        },
+        "expected_status": "needs_review",
+        "extraction": {
+          "values": {
+            "invoice_number": "PW-4936",
+            "item_id": "STRAP-627",
+            "quantity": null,
+            "unit_price": "17.35"
+          },
+          "issues": {
+            "quantity": "invalid_format"
+          },
+          "ocr_lines": {
+            "invoice_number": [
+              "Invoice number: PW-4936"
+            ],
+            "item_id": [
+              "Item ID: STRAP-627"
+            ],
+            "quantity": [
+              "Quantity: ||"
+            ],
+            "unit_price": [
+              "Unit price: $17.35"
+            ]
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice quantity is missing or invalid. Expected a non-negative whole number.",
+        "latency_ms": 141.06
+      },
+      {
+        "image": "07.png",
+        "layout": "table",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "RB-5372",
+          "item_id": "HINGE-564",
+          "quantity": 53,
+          "unit_price": "6.29"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 134.8
+      },
+      {
+        "image": "08.png",
+        "layout": "table",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "MA-3671",
+          "item_id": "CABLE-725",
+          "quantity": 68,
+          "unit_price": "14.80"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 154.21
+      },
+      {
+        "image": "09.png",
+        "layout": "table",
+        "condition": "low resolution and faint ink",
+        "expected_fields": {
+          "invoice_number": "TC-8926",
+          "item_id": "ROTOR-851",
+          "quantity": 32,
+          "unit_price": "25.90"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 132.86
+      },
+      {
+        "image": "10.png",
+        "layout": "cards",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "JN-6492",
+          "item_id": "SEAL-267",
+          "quantity": 17,
+          "unit_price": "4.85"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 148.12
+      },
+      {
+        "image": "11.png",
+        "layout": "cards",
+        "condition": "skewed and blurred",
+        "expected_fields": {
+          "invoice_number": "EL-7826",
+          "item_id": "PUMP-263",
+          "quantity": 74,
+          "unit_price": "19.38"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 138.21
+      },
+      {
+        "image": "12.png",
+        "layout": "cards",
+        "condition": "unit price covered",
+        "expected_fields": {
+          "invoice_number": "KS-4827",
+          "item_id": "DISC-619",
+          "quantity": 75,
+          "unit_price": null
+        },
+        "expected_status": "needs_review",
+        "extraction": {
+          "values": {
+            "invoice_number": null,
+            "item_id": null,
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "invoice_number": "missing_label",
+            "item_id": "missing_label",
+            "quantity": "missing_label",
+            "unit_price": "missing_label"
+          },
+          "ocr_lines": {
+            "invoice_number": [],
+            "item_id": [],
+            "quantity": [],
+            "unit_price": []
+          }
+        },
+        "status": "needs_review",
+        "reason": "Invoice number is missing or unreadable. Invoice item ID is missing or unreadable. Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 138.15
+      }
+    ],
+    "version": "tesseract v5.5.0.20241111"
+  },
+  "qwen3_vl_2b": {
+    "metrics": {
+      "field_accuracy": {
+        "correct": 46,
+        "total": 48
+      },
+      "by_field": {
+        "invoice_number": {
+          "correct": 12,
+          "total": 12
+        },
+        "item_id": {
+          "correct": 12,
+          "total": 12
+        },
+        "quantity": {
+          "correct": 12,
+          "total": 12
+        },
+        "unit_price": {
+          "correct": 10,
+          "total": 12
+        }
+      },
+      "readable_fields": {
+        "correct": 44,
+        "total": 46
+      },
+      "unreadable_fields": {
+        "correct": 2,
+        "total": 2
+      },
+      "decision_accuracy": {
+        "correct": 11,
+        "total": 12
+      },
+      "incorrect_matches": {
+        "count": 0,
+        "should_not_match": 7
+      },
+      "review": {
+        "count": 3,
+        "total": 12
+      },
+      "median_ms": 616.8
+    },
+    "documents": [
+      {
+        "image": "01.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "BA-6127",
+          "item_id": "BOLT-317",
+          "quantity": 24,
+          "unit_price": "8.75"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "BA-6127",
+            "item_id": "BOLT-317",
+            "quantity": 24,
+            "unit_price": "8.75"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"BA-6127\",\n  \"item_id\": \"BOLT-317\",\n  \"quantity\": 24,\n  \"unit_price\": \"8.75\"\n}"
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 626.3
+      },
+      {
+        "image": "02.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "VV-2847",
+          "item_id": "TUBE-642",
+          "quantity": 84,
+          "unit_price": "11.65"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "VV-2847",
+            "item_id": "TUBE-642",
+            "quantity": 84,
+            "unit_price": "11.65"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"VV-2847\",\n  \"item_id\": \"TUBE-642\",\n  \"quantity\": 84,\n  \"unit_price\": \"11.65\"\n}"
+        },
+        "status": "mismatch",
+        "reason": "35 units billed but not received (84 billed, 49 received).",
+        "latency_ms": 594.9
+      },
+      {
+        "image": "03.png",
+        "layout": "labels",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "KF-7163",
+          "item_id": "MOTOR-249",
+          "quantity": 36,
+          "unit_price": "7.40"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "KF-7163",
+            "item_id": "MOTOR-249",
+            "quantity": 36,
+            "unit_price": "7.40"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"KF-7163\",\n  \"item_id\": \"MOTOR-249\",\n  \"quantity\": 36,\n  \"unit_price\": \"7.40\"\n}"
+        },
+        "status": "mismatch",
+        "reason": "Invoice unit price 7.40 differs from purchase order unit price 7.04.",
+        "latency_ms": 623.06
+      },
+      {
+        "image": "04.png",
+        "layout": "labels",
+        "condition": "low resolution and faint ink",
+        "expected_fields": {
+          "invoice_number": "GD-9084",
+          "item_id": "CLAMP-652",
+          "quantity": 46,
+          "unit_price": "3.26"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "GD-9084",
+            "item_id": "CLAMP-652",
+            "quantity": 46,
+            "unit_price": "3.26"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"GD-9084\",\n  \"item_id\": \"CLAMP-652\",\n  \"quantity\": 46,\n  \"unit_price\": \"3.26\"\n}"
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 2578.28
+      },
+      {
+        "image": "05.png",
+        "layout": "labels",
+        "condition": "skewed and blurred",
+        "expected_fields": {
+          "invoice_number": "HT-3156",
+          "item_id": "GASKET-378",
+          "quantity": 12,
+          "unit_price": "9.60"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "HT-3156",
+            "item_id": "GASKET-378",
+            "quantity": 12,
+            "unit_price": "9.60"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"HT-3156\",\n  \"item_id\": \"GASKET-378\",\n  \"quantity\": 12,\n  \"unit_price\": \"9.60\"\n}"
+        },
+        "status": "mismatch",
+        "reason": "Invoice quantity 12 differs from purchase order quantity 21. 9 units received but not billed (21 received, 12 billed).",
+        "latency_ms": 738.05
+      },
+      {
+        "image": "06.png",
+        "layout": "labels",
+        "condition": "quantity covered",
+        "expected_fields": {
+          "invoice_number": "PW-4936",
+          "item_id": "STRAP-627",
+          "quantity": null,
+          "unit_price": "17.35"
+        },
+        "expected_status": "needs_review",
+        "extraction": {
+          "values": {
+            "invoice_number": "PW-4936",
+            "item_id": "STRAP-627",
+            "quantity": null,
+            "unit_price": null
+          },
+          "issues": {
+            "quantity": "missing_or_unreadable",
+            "unit_price": "invalid_value"
+          },
+          "raw_response": "{\n  \"invoice_number\": \"PW-4936\",\n  \"item_id\": \"STRAP-627\",\n  \"quantity\": null,\n  \"unit_price\": \"$17.35\"\n}"
+        },
+        "status": "needs_review",
+        "reason": "Invoice quantity is missing or invalid. Expected a non-negative whole number. Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 608.01
+      },
+      {
+        "image": "07.png",
+        "layout": "table",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "RB-5372",
+          "item_id": "HINGE-564",
+          "quantity": 53,
+          "unit_price": "6.29"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "RB-5372",
+            "item_id": "HINGE-564",
+            "quantity": 53,
+            "unit_price": "6.29"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"RB-5372\",\n  \"item_id\": \"HINGE-564\",\n  \"quantity\": 53,\n  \"unit_price\": \"6.29\"\n}"
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 628.35
+      },
+      {
+        "image": "08.png",
+        "layout": "table",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "MA-3671",
+          "item_id": "CABLE-725",
+          "quantity": 68,
+          "unit_price": "14.80"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "MA-3671",
+            "item_id": "CABLE-725",
+            "quantity": 68,
+            "unit_price": "14.80"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"MA-3671\",\n  \"item_id\": \"CABLE-725\",\n  \"quantity\": 68,\n  \"unit_price\": \"14.80\"\n}"
+        },
+        "status": "mismatch",
+        "reason": "25 units billed but not received (68 billed, 43 received).",
+        "latency_ms": 637.03
+      },
+      {
+        "image": "09.png",
+        "layout": "table",
+        "condition": "low resolution and faint ink",
+        "expected_fields": {
+          "invoice_number": "TC-8926",
+          "item_id": "ROTOR-851",
+          "quantity": 32,
+          "unit_price": "25.90"
+        },
+        "expected_status": "mismatch",
+        "extraction": {
+          "values": {
+            "invoice_number": "TC-8926",
+            "item_id": "ROTOR-851",
+            "quantity": 32,
+            "unit_price": "25.90"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"TC-8926\",\n  \"item_id\": \"ROTOR-851\",\n  \"quantity\": 32,\n  \"unit_price\": \"25.90\"\n}"
+        },
+        "status": "mismatch",
+        "reason": "Invoice unit price 25.90 differs from purchase order unit price 29.50.",
+        "latency_ms": 452.25
+      },
+      {
+        "image": "10.png",
+        "layout": "cards",
+        "condition": "clean",
+        "expected_fields": {
+          "invoice_number": "JN-6492",
+          "item_id": "SEAL-267",
+          "quantity": 17,
+          "unit_price": "4.85"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "JN-6492",
+            "item_id": "SEAL-267",
+            "quantity": 17,
+            "unit_price": "4.85"
+          },
+          "issues": {},
+          "raw_response": "{\n  \"invoice_number\": \"JN-6492\",\n  \"item_id\": \"SEAL-267\",\n  \"quantity\": 17,\n  \"unit_price\": \"4.85\"\n}"
+        },
+        "status": "matched",
+        "reason": "Item IDs, quantities, and unit prices agree.",
+        "latency_ms": 610.45
+      },
+      {
+        "image": "11.png",
+        "layout": "cards",
+        "condition": "skewed and blurred",
+        "expected_fields": {
+          "invoice_number": "EL-7826",
+          "item_id": "PUMP-263",
+          "quantity": 74,
+          "unit_price": "19.38"
+        },
+        "expected_status": "matched",
+        "extraction": {
+          "values": {
+            "invoice_number": "EL-7826",
+            "item_id": "PUMP-263",
+            "quantity": 74,
+            "unit_price": null
+          },
+          "issues": {
+            "unit_price": "invalid_value"
+          },
+          "raw_response": "{\n  \"invoice_number\": \"EL-7826\",\n  \"item_id\": \"PUMP-263\",\n  \"quantity\": 74,\n  \"unit_price\": \"$19.38\"\n}"
+        },
+        "status": "needs_review",
+        "reason": "Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 485.84
+      },
+      {
+        "image": "12.png",
+        "layout": "cards",
+        "condition": "unit price covered",
+        "expected_fields": {
+          "invoice_number": "KS-4827",
+          "item_id": "DISC-619",
+          "quantity": 75,
+          "unit_price": null
+        },
+        "expected_status": "needs_review",
+        "extraction": {
+          "values": {
+            "invoice_number": "KS-4827",
+            "item_id": "DISC-619",
+            "quantity": 75,
+            "unit_price": null
+          },
+          "issues": {
+            "unit_price": "missing_or_unreadable"
+          },
+          "raw_response": "{\n  \"invoice_number\": \"KS-4827\",\n  \"item_id\": \"DISC-619\",\n  \"quantity\": 75,\n  \"unit_price\": null\n}"
+        },
+        "status": "needs_review",
+        "reason": "Invoice unit price is missing or invalid. Expected a non-negative number.",
+        "latency_ms": 585.2
+      }
+    ]
+  }
+}

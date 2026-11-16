@@ -1,0 +1,86 @@
+[
+  {
+    "image": "01.png", "layout": "labels", "condition": "clean",
+    "invoice": {"invoice_number": "BA-6127", "item_id": "BOLT-317", "quantity": 24, "unit_price": 8.75},
+    "purchase_order": {"item_id": "BOLT-317", "quantity": 24, "unit_price": 8.75},
+    "delivery_receipt": {"item_id": "BOLT-317", "quantity": 24},
+    "expected_status": "matched"
+  },
+  {
+    "image": "02.png", "layout": "labels", "condition": "clean",
+    "invoice": {"invoice_number": "VV-2847", "item_id": "TUBE-642", "quantity": 84, "unit_price": 11.65},
+    "purchase_order": {"item_id": "TUBE-642", "quantity": 84, "unit_price": 11.65},
+    "delivery_receipt": {"item_id": "TUBE-642", "quantity": 49},
+    "expected_status": "mismatch"
+  },
+  {
+    "image": "03.png", "layout": "labels", "condition": "clean",
+    "invoice": {"invoice_number": "KF-7163", "item_id": "MOTOR-249", "quantity": 36, "unit_price": 7.40},
+    "purchase_order": {"item_id": "MOTOR-249", "quantity": 36, "unit_price": 7.04},
+    "delivery_receipt": {"item_id": "MOTOR-249", "quantity": 36},
+    "expected_status": "mismatch"
+  },
+  {
+    "image": "04.png", "layout": "labels", "condition": "low resolution and faint ink",
+    "invoice": {"invoice_number": "GD-9084", "item_id": "CLAMP-652", "quantity": 46, "unit_price": 3.26},
+    "purchase_order": {"item_id": "CLAMP-652", "quantity": 46, "unit_price": 3.26},
+    "delivery_receipt": {"item_id": "CLAMP-652", "quantity": 46},
+    "expected_status": "matched"
+  },
+  {
+    "image": "05.png", "layout": "labels", "condition": "skewed and blurred",
+    "invoice": {"invoice_number": "HT-3156", "item_id": "GASKET-378", "quantity": 12, "unit_price": 9.60},
+    "purchase_order": {"item_id": "GASKET-378", "quantity": 21, "unit_price": 9.60},
+    "delivery_receipt": {"item_id": "GASKET-378", "quantity": 21},
+    "expected_status": "mismatch"
+  },
+  {
+    "image": "06.png", "layout": "labels", "condition": "quantity covered",
+    "invoice": {"invoice_number": "PW-4936", "item_id": "STRAP-627", "quantity": null, "unit_price": 17.35},
+    "purchase_order": {"item_id": "STRAP-627", "quantity": 57, "unit_price": 17.35},
+    "delivery_receipt": {"item_id": "STRAP-627", "quantity": 57},
+    "expected_status": "needs_review"
+  },
+  {
+    "image": "07.png", "layout": "table", "condition": "clean",
+    "invoice": {"invoice_number": "RB-5372", "item_id": "HINGE-564", "quantity": 53, "unit_price": 6.29},
+    "purchase_order": {"item_id": "HINGE-564", "quantity": 53, "unit_price": 6.29},
+    "delivery_receipt": {"item_id": "HINGE-564", "quantity": 53},
+    "expected_status": "matched"
+  },
+  {
+    "image": "08.png", "layout": "table", "condition": "clean",
+    "invoice": {"invoice_number": "MA-3671", "item_id": "CABLE-725", "quantity": 68, "unit_price": 14.80},
+    "purchase_order": {"item_id": "CABLE-725", "quantity": 68, "unit_price": 14.80},
+    "delivery_receipt": {"item_id": "CABLE-725", "quantity": 43},
+    "expected_status": "mismatch"
+  },
+  {
+    "image": "09.png", "layout": "table", "condition": "low resolution and faint ink",
+    "invoice": {"invoice_number": "TC-8926", "item_id": "ROTOR-851", "quantity": 32, "unit_price": 25.90},
+    "purchase_order": {"item_id": "ROTOR-851", "quantity": 32, "unit_price": 29.50},
+    "delivery_receipt": {"item_id": "ROTOR-851", "quantity": 32},
+    "expected_status": "mismatch"
+  },
+  {
+    "image": "10.png", "layout": "cards", "condition": "clean",
+    "invoice": {"invoice_number": "JN-6492", "item_id": "SEAL-267", "quantity": 17, "unit_price": 4.85},
+    "purchase_order": {"item_id": "SEAL-267", "quantity": 17, "unit_price": 4.85},
+    "delivery_receipt": {"item_id": "SEAL-267", "quantity": 17},
+    "expected_status": "matched"
+  },
+  {
+    "image": "11.png", "layout": "cards", "condition": "skewed and blurred",
+    "invoice": {"invoice_number": "EL-7826", "item_id": "PUMP-263", "quantity": 74, "unit_price": 19.38},
+    "purchase_order": {"item_id": "PUMP-263", "quantity": 74, "unit_price": 19.38},
+    "delivery_receipt": {"item_id": "PUMP-263", "quantity": 74},
+    "expected_status": "matched"
+  },
+  {
+    "image": "12.png", "layout": "cards", "condition": "unit price covered",
+    "invoice": {"invoice_number": "KS-4827", "item_id": "DISC-619", "quantity": 75, "unit_price": null},
+    "purchase_order": {"item_id": "DISC-619", "quantity": 75, "unit_price": 12.38},
+    "delivery_receipt": {"item_id": "DISC-619", "quantity": 75},
+    "expected_status": "needs_review"
+  }
+]

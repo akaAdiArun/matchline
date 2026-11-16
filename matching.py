@@ -3,10 +3,12 @@
 from decimal import Decimal
 
 
-def match(invoice, purchase_order, delivery_receipt):
+def match(invoice, purchase_order, delivery_receipt, *, require_invoice_number=False):
     """Return a decision, its reason, and the values read from each document."""
     values = {}
     review_reasons = []
+    if require_invoice_number and not invoice.get("invoice_number"):
+        review_reasons.append("Invoice number is missing or unreadable.")
     documents = (
         ("invoice", "Invoice", invoice),
         ("purchase_order", "Purchase order", purchase_order),
