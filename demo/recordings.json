@@ -1,0 +1,374 @@
+{
+  "engine": "tesseract v5.5.0.20241111",
+  "cases": {
+    "clean": {
+      "status": "matched",
+      "reason": "Item IDs, quantities, and unit prices agree.",
+      "values": {
+        "invoice": {
+          "item_id": "FILTER-01",
+          "quantity": 100,
+          "unit_price": "12.50"
+        },
+        "purchase_order": {
+          "item_id": "FILTER-01",
+          "quantity": 100,
+          "unit_price": "12.50"
+        },
+        "delivery_receipt": {
+          "item_id": "FILTER-01",
+          "quantity": 100
+        }
+      },
+      "invoice_extraction": {
+        "source": "examples\\scans\\clean.png",
+        "fields": {
+          "invoice_number": {
+            "value": "ML-1048",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "ML-1048",
+                "location": {
+                  "page": 1,
+                  "left": 390,
+                  "top": 287,
+                  "width": 151,
+                  "height": 29
+                },
+                "line_text": "Invoice number: ML-1048",
+                "line_location": {
+                  "page": 1,
+                  "left": 103,
+                  "top": 287,
+                  "width": 438,
+                  "height": 29
+                },
+                "confidence": 90.414627
+              }
+            ]
+          },
+          "item_id": {
+            "value": "FILTER-01",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "FILTER-01",
+                "location": {
+                  "page": 1,
+                  "left": 251,
+                  "top": 381,
+                  "width": 183,
+                  "height": 29
+                },
+                "line_text": "Item ID: FILTER-01",
+                "line_location": {
+                  "page": 1,
+                  "left": 103,
+                  "top": 381,
+                  "width": 331,
+                  "height": 29
+                },
+                "confidence": 91.148537
+              }
+            ]
+          },
+          "quantity": {
+            "value": 100,
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "100",
+                "location": {
+                  "page": 1,
+                  "left": 280,
+                  "top": 457,
+                  "width": 60,
+                  "height": 29
+                },
+                "line_text": "Quantity: 100",
+                "line_location": {
+                  "page": 1,
+                  "left": 101,
+                  "top": 457,
+                  "width": 239,
+                  "height": 37
+                },
+                "confidence": 94.927536
+              }
+            ]
+          },
+          "unit_price": {
+            "value": "12.50",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "$12.50",
+                "location": {
+                  "page": 1,
+                  "left": 288,
+                  "top": 531,
+                  "width": 117,
+                  "height": 35
+                },
+                "line_text": "Unit price: $12.50",
+                "line_location": {
+                  "page": 1,
+                  "left": 102,
+                  "top": 531,
+                  "width": 303,
+                  "height": 39
+                },
+                "confidence": 96.839615
+              }
+            ]
+          }
+        }
+      }
+    },
+    "short": {
+      "status": "mismatch",
+      "reason": "40 units billed but not received (100 billed, 60 received).",
+      "values": {
+        "invoice": {
+          "item_id": "FILTER-01",
+          "quantity": 100,
+          "unit_price": "12.50"
+        },
+        "purchase_order": {
+          "item_id": "FILTER-01",
+          "quantity": 100,
+          "unit_price": "12.50"
+        },
+        "delivery_receipt": {
+          "item_id": "FILTER-01",
+          "quantity": 60
+        }
+      },
+      "invoice_extraction": {
+        "source": "examples\\scans\\short-delivery.png",
+        "fields": {
+          "invoice_number": {
+            "value": "ML-2064",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "ML-2064",
+                "location": {
+                  "page": 1,
+                  "left": 390,
+                  "top": 287,
+                  "width": 151,
+                  "height": 29
+                },
+                "line_text": "Invoice number: ML-2064",
+                "line_location": {
+                  "page": 1,
+                  "left": 103,
+                  "top": 287,
+                  "width": 438,
+                  "height": 29
+                },
+                "confidence": 91.656052
+              }
+            ]
+          },
+          "item_id": {
+            "value": "FILTER-01",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "FILTER-01",
+                "location": {
+                  "page": 1,
+                  "left": 251,
+                  "top": 381,
+                  "width": 183,
+                  "height": 29
+                },
+                "line_text": "Item ID: FILTER-01",
+                "line_location": {
+                  "page": 1,
+                  "left": 103,
+                  "top": 381,
+                  "width": 331,
+                  "height": 29
+                },
+                "confidence": 91.148537
+              }
+            ]
+          },
+          "quantity": {
+            "value": 100,
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "100",
+                "location": {
+                  "page": 1,
+                  "left": 280,
+                  "top": 457,
+                  "width": 60,
+                  "height": 29
+                },
+                "line_text": "Quantity: 100",
+                "line_location": {
+                  "page": 1,
+                  "left": 101,
+                  "top": 457,
+                  "width": 239,
+                  "height": 37
+                },
+                "confidence": 94.977097
+              }
+            ]
+          },
+          "unit_price": {
+            "value": "12.50",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "$12.50",
+                "location": {
+                  "page": 1,
+                  "left": 288,
+                  "top": 531,
+                  "width": 117,
+                  "height": 35
+                },
+                "line_text": "Unit price: $12.50",
+                "line_location": {
+                  "page": 1,
+                  "left": 102,
+                  "top": 531,
+                  "width": 303,
+                  "height": 39
+                },
+                "confidence": 96.90033
+              }
+            ]
+          }
+        }
+      }
+    },
+    "unreadable": {
+      "status": "needs_review",
+      "reason": "Invoice quantity is missing or invalid. Expected a non-negative whole number.",
+      "values": {
+        "invoice": {
+          "item_id": "FILTER-01",
+          "quantity": null,
+          "unit_price": "12.50"
+        },
+        "purchase_order": {
+          "item_id": "FILTER-01",
+          "quantity": 100,
+          "unit_price": "12.50"
+        },
+        "delivery_receipt": {
+          "item_id": "FILTER-01",
+          "quantity": 100
+        }
+      },
+      "invoice_extraction": {
+        "source": "examples\\scans\\quantity-only-obscured.png",
+        "fields": {
+          "invoice_number": {
+            "value": "ML-1048",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "ML-1048",
+                "location": {
+                  "page": 1,
+                  "left": 390,
+                  "top": 287,
+                  "width": 151,
+                  "height": 29
+                },
+                "line_text": "Invoice number: ML-1048",
+                "line_location": {
+                  "page": 1,
+                  "left": 103,
+                  "top": 287,
+                  "width": 438,
+                  "height": 29
+                },
+                "confidence": 89.039383
+              }
+            ]
+          },
+          "item_id": {
+            "value": "FILTER-01",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "FILTER-01",
+                "location": {
+                  "page": 1,
+                  "left": 258,
+                  "top": 382,
+                  "width": 186,
+                  "height": 29
+                },
+                "line_text": "Item ID: FILTER-01",
+                "line_location": {
+                  "page": 1,
+                  "left": 102,
+                  "top": 382,
+                  "width": 342,
+                  "height": 29
+                },
+                "confidence": 92.046036
+              }
+            ]
+          },
+          "quantity": {
+            "value": null,
+            "issue": "missing_value",
+            "observations": [
+              {
+                "raw_text": null,
+                "location": null,
+                "line_text": "Quantity:",
+                "line_location": {
+                  "page": 1,
+                  "left": 101,
+                  "top": 457,
+                  "width": 149,
+                  "height": 37
+                },
+                "confidence": null
+              }
+            ]
+          },
+          "unit_price": {
+            "value": "12.50",
+            "issue": null,
+            "observations": [
+              {
+                "raw_text": "$12.50",
+                "location": {
+                  "page": 1,
+                  "left": 288,
+                  "top": 531,
+                  "width": 117,
+                  "height": 35
+                },
+                "line_text": "Unit price: $12.50",
+                "line_location": {
+                  "page": 1,
+                  "left": 102,
+                  "top": 531,
+                  "width": 303,
+                  "height": 39
+                },
+                "confidence": 96.839615
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
