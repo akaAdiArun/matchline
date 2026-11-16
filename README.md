@@ -4,15 +4,15 @@ Matchline compares one item across a supplier invoice, a purchase order, and a d
 
 ## Recorded demo on Windows
 
-From PowerShell, check out the demo branch and start a local server from the repository root.
+From PowerShell, clone the repository and start a local server from its root.
 
 ```powershell
-git clone --branch milestone-4-demo --single-branch https://github.com/akaAdiArun/matchline.git
+git clone https://github.com/akaAdiArun/matchline.git
 cd matchline
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-If you already have the demo branch checked out, run just the server command. Open [the local demo](http://127.0.0.1:8000/demo/) in a browser. The demo uses recorded pipeline outputs and runs with Python alone. Select a case, then click an extracted field to highlight its OCR location when one is available.
+If you already have the repository checked out, run just the server command. Open [the local demo](http://127.0.0.1:8000/demo/) in a browser. The demo uses recorded pipeline outputs and runs with Python alone. Select a case, then click an extracted field to highlight its OCR location when one is available.
 
 ![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
 
