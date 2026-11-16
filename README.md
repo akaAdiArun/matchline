@@ -1,10 +1,12 @@
 # Matchline
 
-Matchline helps you check a supplier’s bill before you pay it. It compares what you were billed for with what you ordered and what actually arrived.
+Suppliers send scanned invoices in different layouts. Before you can check a bill, you need to find the right numbers on the page.
 
-If the bill says 100 items and only 60 arrived, Matchline flags the 40 missing items and shows the numbers behind its decision. If it can’t read a number, it asks someone to check it.
+Matchline’s vision model reads the invoice, and Python checks it against the purchase order and delivery record. If the bill says 100 items and only 60 arrived, Matchline flags the 40-item gap. If a needed number can’t be read, the bill goes to review.
 
 **[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Recorded demo with three sample invoices you can explore in your browser.
+
+**[See where AI helps](https://akaadiarun.github.io/matchline/demo/#where-ai-helps)** · See how two tools read the same invoice table and why only one could pass values to the Python checks.
 
 ![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
 

@@ -51,6 +51,8 @@ section[id] { scroll-margin-top: 24px; }
 .mode span { width: 7px; height: 7px; border-radius: 50%; background: #5d8330; }
 h1 { margin-block: 8px 5px; font-size: clamp(32px, 5vw, 52px); font-weight: 730; letter-spacing: -.065em; line-height: 1.05; }
 .intro-copy { color: var(--quiet); font-size: 15px; line-height: 1.5; }
+.compare-link { display: inline-flex; align-items: center; gap: 9px; margin-top: 12px; padding: 9px 12px; border: 1px solid #a6cc52; border-radius: 8px; background: var(--accent); color: #233322; font-size: 13px; font-weight: 720; text-decoration: none; }
+.compare-link:hover { background: #dcf59d; }
 .case-picker { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid #d6ded5; border-radius: 11px; background: #e9ede7; }
 .case-picker button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #45564e; cursor: pointer; font-size: 12px; font-weight: 630; white-space: nowrap; }
 .case-picker button:hover { color: var(--ink); background: #f5f7f3; }
@@ -107,6 +109,26 @@ figcaption { min-height: 41px; display: flex; align-items: center; padding: 9px 
 .ocr-detail dd { margin-top: 4px; font: 600 12px/1.5 "IBM Plex Mono", Consolas, monospace; overflow-wrap: anywhere; }
 .ocr-detail div:last-child { text-align: right; }
 
+.comparison { margin-top: 35px; }
+.comparison .section-heading .mode { margin: 0 0 7px; color: #314f3d; font-size: 11px; }
+.comparison-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: 18px; }
+.comparison-scan { display: flex; flex-direction: column; overflow: hidden; }
+.comparison-scan .scan-stage { border-top: 0; }
+.comparison-scan img { display: block; width: 100%; height: auto; max-width: 440px; box-shadow: 0 1px 3px #243a2729, 0 8px 28px #2a3d2820; }
+.comparison-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.comparison-card { padding: 15px; }
+.comparison-card-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+.comparison-card h3 { font-size: 15px; letter-spacing: -.033em; font-weight: 710; }
+.comparison-verdict { color: var(--state-ink); background: var(--state-bg); border-color: var(--state-line); }
+.comparison-verdict[data-status=needs_review] { --state-ink: var(--amber); --state-bg: #faf2e2; --state-line: #ecddc1; }
+.comparison-verdict[data-status=matched] { --state-ink: var(--green); --state-bg: #edf6ec; --state-line: #d0e5d1; }
+.comparison-caption { margin: 14px 0 6px; color: var(--quiet); font-size: 12px; font-weight: 680; }
+.comparison-card pre { margin: 0; padding: 10px; border-radius: 7px; background: #f2f5f0; font: 12px/1.55 "IBM Plex Mono", Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comparison-fields { display: grid; gap: 1px; padding: 4px 10px; border-radius: 7px; background: #f2f5f0; }
+.comparison-fields div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 8px; padding: 6px 0; font-size: 12px; }
+.comparison-fields div + div { border-top: 1px solid var(--line); }
+.comparison-fields dd { font: 650 12px/1.55 "IBM Plex Mono", Consolas, monospace; }
+.comparison-explanation { margin-top: 10px; color: var(--quiet); font-size: 13px; line-height: 1.5; }
 .benchmark { margin-block: 35px 32px; }
 .section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; margin-bottom: 13px; }
 .section-heading h2, .run-local h2 { font-size: clamp(21px, 3vw, 29px); line-height: 1.2; font-weight: 730; letter-spacing: -.053em; }
@@ -132,12 +154,13 @@ figcaption { min-height: 41px; display: flex; align-items: center; padding: 9px 
 .run-local pre { margin: 11px 0; padding: 12px 14px; overflow-x: auto; border-radius: 8px; color: #eef6ef; background: #1b3128; font: 12px/1.5 "IBM Plex Mono", Consolas, monospace; }
 .guide-links { display: flex; flex-wrap: wrap; gap: 14px; }
 .page-footer { display: flex; justify-content: space-between; padding-block: 17px 25px; color: var(--quiet); font-size: 12px; }
-#recording-message, #benchmark-message { color: var(--quiet); padding: 12px 0; font-size: 14px; }
+#recording-message, #comparison-message, #benchmark-message { color: var(--quiet); padding: 12px 0; font-size: 14px; }
 
 @media (max-width: 990px) {
   .shell { width: calc(100% - 38px); }
   .intro { display: grid; gap: 14px; }
   .case-picker { justify-self: start; }
+  .comparison-content { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 }
 
 @media (max-width: 720px) {
@@ -149,6 +172,7 @@ figcaption { min-height: 41px; display: flex; align-items: center; padding: 9px 
   .case-picker { gap: 3px; padding: 3px; }
   .case-picker button { gap: 5px; padding: 8px 6px; font-size: 11px; }
   .workspace, .benchmark-content { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .comparison-results { grid-template-columns: minmax(0, 1fr); }
   .audit { grid-row: 1; }
   .scan-stage { padding: 13px; }
   .section-heading { align-items: flex-start; }

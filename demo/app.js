@@ -15,6 +15,7 @@ const decisions = {
   mismatch: ["Mismatch", "Delivery shortfall"],
   needs_review: ["Needs review", "Quantity needs review"],
 };
+const comparisonImage = "07.png";
 
 let recordings;
 let fields;
@@ -27,10 +28,10 @@ function element(tag, text, className) {
   return node;
 }
 
-async function readJson(path) {
+async function readRecording(path, format = "json") {
   const response = await fetch(path);
   if (!response.ok) throw new Error(`${path} returned HTTP ${response.status}`);
-  return response.json();
+  return format === "text" ? response.text() : response.json();
 }
 
 function fieldLocation(field) {
@@ -147,6 +148,35 @@ function reviews(value) {
   return `${value.count}/${value.total} (${(100 * value.count / value.total).toFixed(1)}%)`;
 }
 
+function showComparison(report, ocrText) {
+  const ocr = report.tesseract.documents.find((entry) => entry.image === comparisonImage);
+  const vision = report.qwen3_vl_2b.documents.find((entry) => entry.image === comparisonImage);
+  if (!ocr || !vision) throw new Error("The comparison needs both recordings for the same scan.");
+
+  byId("comparison-scan").src = `../evaluation/images/${ocr.image}`;
+  for (const [id, entry] of [["comparison-ocr-verdict", ocr], ["comparison-vision-verdict", vision]]) {
+    const badge = byId(id);
+    badge.textContent = decisions[entry.status][0];
+    badge.dataset.status = entry.status;
+  }
+
+  byId("comparison-ocr-text").textContent = ocrText.trim();
+  const missing = Object.values(ocr.extraction.issues).filter((issue) => issue === "missing_label").length;
+  byId("comparison-ocr-explanation").textContent =
+    `This table uses “Units billed” and “Price each”. The parser expected labels like “Quantity:” and “Unit price:”, so it left ${missing} fields empty.`;
+
+  const values = vision.extraction.values;
+  byId("comparison-vision-fields").replaceChildren(...Object.entries(fieldLabels).map(([name, label]) => {
+    const row = element("div");
+    row.dataset.field = name;
+    const value = values[name];
+    const display = value === null ? "Not extracted" : name === "unit_price" ? `$${value}` : value;
+    row.append(element("dt", label), element("dd", display));
+    return row;
+  }));
+  byId("comparison-vision-explanation").textContent = vision.reason;
+}
+
 function showBenchmark(report) {
   const ocr = report.tesseract;
   const vision = report.qwen3_vl_2b;
@@ -165,7 +195,7 @@ function showBenchmark(report) {
     return row;
   }));
 
-  const ocrMiss = ocr.documents.find((entry) => entry.image === "07.png");
+  const ocrMiss = ocr.documents.find((entry) => entry.image === comparisonImage);
   const missing = Object.values(ocrMiss.extraction.issues).filter((issue) => issue === "missing_label").length;
   byId("ocr-failure").textContent =
     `Invoice ${ocrMiss.expected_fields.invoice_number} should match. The parser found ${missing} missing labels and sent it to review.`;
@@ -184,7 +214,7 @@ scan.addEventListener("error", () => {
   byId("location-status").textContent = "The recorded invoice image could not be loaded.";
 });
 
-readJson("recordings.json").then((data) => {
+readRecording("recordings.json").then((data) => {
   recordings = data;
   for (const button of caseButtons) button.addEventListener("click", () => showCase(button.dataset.case));
   showCase("short");
@@ -195,11 +225,21 @@ readJson("recordings.json").then((data) => {
   console.error(error);
 });
 
-readJson("../evaluation/results.json").then((data) => {
+const evaluation = readRecording("../evaluation/results.json");
+evaluation.then((data) => {
   showBenchmark(data);
   byId("benchmark-message").hidden = true;
   byId("benchmark-content").hidden = false;
 }).catch((error) => {
   byId("benchmark-message").textContent = "Could not load the saved benchmark results.";
+  console.error(error);
+});
+
+Promise.all([evaluation, readRecording("invoice-07-ocr.txt", "text")]).then(([data, ocrText]) => {
+  showComparison(data, ocrText);
+  byId("comparison-message").hidden = true;
+  byId("comparison-content").hidden = false;
+}).catch((error) => {
+  byId("comparison-message").textContent = "Could not load the recorded comparison.";
   console.error(error);
 });

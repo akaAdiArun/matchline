@@ -1,0 +1,6 @@
+COBALT SERVICE PARTS
+SALES INVOICE
+Bill reference RB-5372
+Item code Units billed Price each
+HINGE-564 53 $6.29
+Payment terms / 45 days

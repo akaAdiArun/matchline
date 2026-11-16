@@ -32,6 +32,7 @@
           <p class="mode"><span aria-hidden="true"></span>Recorded demo</p>
           <h1 id="review-title">Invoice review</h1>
           <p class="intro-copy">Compare what was billed, what was ordered, and what arrived.</p>
+          <a class="compare-link" href="#where-ai-helps">See where AI helps <span aria-hidden="true">↓</span></a>
         </div>
         <div class="case-picker" role="group" aria-label="Choose a fictional invoice">
           <button type="button" data-case="clean" aria-pressed="false"><span class="case-dot green"></span>Clean match</button>
@@ -85,6 +86,48 @@
             </dl>
           </div>
         </section>
+      </div>
+    </section>
+
+    <section class="comparison" id="where-ai-helps" aria-labelledby="comparison-title" tabindex="-1">
+      <div class="section-heading">
+        <div>
+          <p class="mode"><span aria-hidden="true"></span>Recorded outputs</p>
+          <h2 id="comparison-title">Where AI helps</h2>
+          <p>Two ways to read the same invoice. The same Python code checks the extracted fields against the order and delivery record.</p>
+        </div>
+      </div>
+
+      <p id="comparison-message" role="status">Loading the recorded comparison…</p>
+      <div id="comparison-content" class="comparison-content" hidden>
+        <figure class="panel comparison-scan">
+          <div class="scan-stage">
+            <img id="comparison-scan" alt="Fictional invoice with item code, units billed, and price in a table" width="860" height="720">
+          </div>
+          <figcaption>Both runs used this invoice scan.</figcaption>
+        </figure>
+
+        <div class="comparison-results">
+          <article class="panel comparison-card" aria-labelledby="comparison-ocr-title">
+            <header class="comparison-card-heading">
+              <h3 id="comparison-ocr-title">Tesseract + parser</h3>
+              <span class="verdict comparison-verdict" id="comparison-ocr-verdict"></span>
+            </header>
+            <p class="comparison-caption">Text Tesseract read</p>
+            <pre id="comparison-ocr-text"></pre>
+            <p class="comparison-explanation" id="comparison-ocr-explanation"></p>
+          </article>
+
+          <article class="panel comparison-card" aria-labelledby="comparison-vision-title">
+            <header class="comparison-card-heading">
+              <h3 id="comparison-vision-title">Qwen vision model</h3>
+              <span class="verdict comparison-verdict" id="comparison-vision-verdict"></span>
+            </header>
+            <p class="comparison-caption">Fields passed to Python</p>
+            <dl class="comparison-fields" id="comparison-vision-fields"></dl>
+            <p class="comparison-explanation" id="comparison-vision-explanation"></p>
+          </article>
+        </div>
       </div>
     </section>
 
