@@ -80,3 +80,7 @@ The small synthetic evaluation compares the existing OCR parser with Qwen3-VL-2B
 Pass three UTF-8 JSON objects as separate files in invoice, purchase order, delivery receipt order. Each object represents one line item and has an `item_id` (a nonblank string) and a `quantity` (a non-negative JSON integer). The invoice and purchase order also have a `unit_price` (a finite, non-negative JSON number). The two prices are assumed to be in the same currency. The program compares prices exactly and prints them as decimal strings.
 
 All item IDs and quantities must agree, and the invoice unit price must equal the purchase order unit price. A missing, null, or invalid required value takes precedence and returns `needs_review`. The result keeps that value as `null` and identifies the affected field. The CLI exits successfully for any of the three decisions. A file it cannot read, invalid JSON, or a top-level value other than an object is a command error.
+
+## Contact
+
+Adithyakrishna Arunkumar · [adithyakrishna10000@gmail.com](mailto:adithyakrishna10000@gmail.com)
