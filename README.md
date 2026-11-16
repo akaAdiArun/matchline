@@ -2,6 +2,22 @@
 
 Matchline compares one item across a supplier invoice, a purchase order, and a delivery receipt. It reports its decision, the reason, and the values read from each document. See [the project roadmap](docs/PROJECT.md) for the full invoice auditor.
 
+## Recorded demo on Windows
+
+From PowerShell, check out the demo branch and start a local server from the repository root.
+
+```powershell
+git clone --branch milestone-4-demo --single-branch https://github.com/akaAdiArun/matchline.git
+cd matchline
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+If you already have the demo branch checked out, run just the server command. Open [the local demo](http://127.0.0.1:8000/demo/) in a browser. The demo uses recorded pipeline outputs and runs with Python alone. Select a case, then click an extracted field to highlight its OCR location when one is available.
+
+![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
+
+The demo loads the [original benchmark results](evaluation/results.json) for its comparison. To regenerate the three recordings after [setting up the real OCR pipeline](#match-a-scanned-invoice-on-windows), run `python -m demo.record` from the repository root. The bundled Inter font is covered by the [SIL Open Font License](demo/fonts/OFL.txt).
+
 Start with [matching.py](matching.py) for the decision rules and [invoice_ocr.py](invoice_ocr.py) for scan extraction. [matchline.py](matchline.py) connects the two and prints the result as JSON.
 
 ## Run the examples
