@@ -2,7 +2,7 @@
 
 Matchline compares one item across a supplier invoice, a purchase order, and a delivery receipt. It reports its decision, the reason, and the values read from each document. See [the project roadmap](docs/PROJECT.md) for the full invoice auditor.
 
-Start with [matching.py](matching.py). It contains the decision rules. [matchline.py](matchline.py) reads the input files and prints the result as JSON.
+Start with [matching.py](matching.py) for the decision rules and [invoice_ocr.py](invoice_ocr.py) for scan extraction. [matchline.py](matchline.py) connects the two and prints the result as JSON.
 
 ## Run the examples
 
@@ -24,11 +24,52 @@ python -m matchline examples/invoice-unreadable.json examples/purchase-order.jso
 
 To try the receipt change, run the second command, then change its last argument to `examples/receipt.json` and run it again. The only difference between the two receipt files is their quantity, which goes from 60 to 100. The result changes from `mismatch` to `matched`.
 
+## Match a scanned invoice on Windows
+
+Install the x64 Tesseract build with English language data from PowerShell. The scan examples were verified with Tesseract 5.5.0. The package comes from the [Tesseract release](https://github.com/tesseract-ocr/tesseract/releases/tag/5.5.0).
+
+```powershell
+winget install --exact --id tesseract-ocr.tesseract --version 5.5.0.20241111 --source winget --interactive
+$env:MATCHLINE_TESSERACT = 'C:\Program Files\Tesseract-OCR\tesseract.exe'
+& $env:MATCHLINE_TESSERACT --version
+& $env:MATCHLINE_TESSERACT --list-langs
+```
+
+Keep English selected in the installer and check that `--list-langs` includes `eng`. If you installed Tesseract in a different directory, set `MATCHLINE_TESSERACT` to that executable. Matchline also accepts `tesseract` on PATH when the variable is unset. The Python code uses the standard library.
+
+Run these commands from the repository root in the same PowerShell session. Only the invoice input changes to an image.
+
+```powershell
+python -m matchline --invoice-image examples/scans/clean.png examples/purchase-order.json examples/receipt.json
+python -m matchline --invoice-image examples/scans/short-delivery.png examples/purchase-order.json examples/receipt-short.json
+python -m matchline --invoice-image examples/scans/unreadable-quantity.png examples/purchase-order.json examples/receipt.json
+```
+
+| Scan | Expected status | Evidence |
+| --- | --- | --- |
+| Clean | `matched` | Invoice ML-1048 bills 100 units at 12.50. |
+| Short delivery | `mismatch` | Invoice ML-2064 bills 100 units and the receipt shows 60, a shortfall of 40. |
+| Obscured quantity | `needs_review` | The quantity on invoice ML-3192 is covered by an opaque rectangle. |
+
+The result includes `invoice_extraction` with observations for the invoice number, item ID, quantity, and unit price. Each observation stores the OCR text, bounding boxes for the value and full line when available, and the lowest confidence among the words in the value. Coordinates use pixels from the image's top left and page numbering starts at 1. If OCR only reads the label, its line location remains available while the value and its location are `null`.
+
+In the verified run on the obscured scan, Tesseract read `Quantity:` without a value. It also read `FILTER-01` correctly at a confidence of 60.55, below the acceptance threshold of 80. Matchline preserved the item text and its box as evidence, marked both fields unresolved, and returned `needs_review`.
+
+To see Tesseract's original word rows directly, run this command.
+
+```powershell
+& $env:MATCHLINE_TESSERACT examples/scans/clean.png stdout -l eng --psm 6 tsv
+```
+
+The scan parser expects one upright English page with one line item and one each of the labels `Invoice number:`, `Item ID:`, `Quantity:`, and `Unit price:`. It expects each value on the same line as its label. IDs can contain letters, digits, hyphens, and underscores. Quantities are whole numbers. Prices accept an optional dollar sign and up to two decimal places. Missing labels, conflicting or repeated labels, invalid text, and word confidence below 80 leave the value unresolved. An unresolved invoice number also requires review so the decision can be tied to a specific invoice. OCR confidence is a heuristic and can miss recognition errors. This baseline supports the supplied scan layout. More complex layouts, handwriting, and image cleanup are outside its scope.
+
 ## Run the tests
 
 ```sh
 python -m unittest discover -s tests -v
 ```
+
+The scan tests run the installed Tesseract against the checked-in PNGs, including a separate scan where only the quantity is obscured. They are skipped if the executable is unavailable. The matching and parser tests run independently.
 
 ## Input and decision rules
 
