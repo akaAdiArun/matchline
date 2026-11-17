@@ -1,16 +1,27 @@
 # Matchline
 
-Suppliers send scanned invoices in different layouts. Before you can check a bill, you need to find the right numbers on the page.
+**Check supplier bills against what you ordered and what actually arrived.**
 
-Matchline’s vision model reads the invoice, and Python checks it against the purchase order and delivery record. If the bill says 100 items and only 60 arrived, Matchline flags the 40-item gap. If a needed number can’t be read, the bill goes to review.
+Suppliers send scanned invoices in all kinds of layouts. Matchline’s vision model reads the invoice, and Python checks the extracted details against the purchase order and delivery record. If a needed number can’t be read, the bill goes to review.
 
-**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · Recorded demo with three sample invoices you can explore in your browser.
+**[Try the demo](https://akaadiarun.github.io/matchline/demo/)** · **[See where AI helps](https://akaadiarun.github.io/matchline/demo/#where-ai-helps)** · [MIT License](LICENSE)
 
-**[See where AI helps](https://akaadiarun.github.io/matchline/demo/#where-ai-helps)** · See how two tools read the same invoice table and why only one could pass values to the Python checks.
+*Recorded demo with three sample invoices you can explore in your browser.*
 
-![Matchline's recorded short delivery demo with the OCR quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)
+[![Matchline's recorded short delivery demo with the billed quantity highlighted and the decision showing 100 billed, 60 received, and 40 billed but not received.](docs/demo-screenshot.png)](https://akaadiarun.github.io/matchline/demo/)
 
-On **12 synthetic invoices**, Qwen3-VL-2B produced **11/12 correct matching decisions** versus **7/12 for Tesseract plus parsing**. Median scan-to-decision latency was **617 ms versus 137 ms**, respectively. See the [benchmark method, reproduction steps, and failure examples](evaluation/README.md).
+*Short delivery: The supplier billed for 100 units, 60 arrived, and Matchline flags the 40-unit gap. Select a field to see where it came from on the invoice.*
+
+## Where AI helps
+
+Tesseract read `53` and `$6.29` on the same invoice table Qwen saw. The parser expected different labels and sent the bill to review. Qwen identified the quantity and price in the table, and the same Python checks returned **Matched**.
+
+| Result on 12 synthetic invoices | Tesseract + parser | Qwen3-VL-2B |
+| --- | ---: | ---: |
+| Correct matching decisions | 7/12 | **11/12** |
+| Median scan-to-decision time | **137 ms** | 617 ms |
+
+[Read the benchmark method, reproduction steps, and failure examples](evaluation/README.md).
 
 ## Recorded demo on Windows
 
@@ -24,7 +35,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 If you already have the repository checked out, run just the server command. Open [the local demo](http://127.0.0.1:8000/demo/) in a browser. The demo uses recorded pipeline outputs and runs with Python alone. Select a case, then click an extracted field to highlight its OCR location when one is available.
 
-The demo loads the [original benchmark results](evaluation/results.json) for its comparison. To regenerate the three recordings after [setting up the real OCR pipeline](#match-a-scanned-invoice-on-windows), run `python -m demo.record` from the repository root. The bundled Inter font is covered by the [SIL Open Font License](demo/fonts/OFL.txt).
+The demo loads the [original benchmark results](evaluation/results.json) for its comparison. To regenerate the three recordings after [setting up the real OCR pipeline](#match-a-scanned-invoice-on-windows), run `python -m demo.record` from the repository root.
 
 Start with [matching.py](matching.py) for the decision rules and [invoice_ocr.py](invoice_ocr.py) for scan extraction. [matchline.py](matchline.py) connects the two and prints the result as JSON. See the [project roadmap](docs/PROJECT.md) for the full plan.
 
@@ -100,6 +111,10 @@ The scan tests run the installed Tesseract against the checked-in PNGs, includin
 Pass three UTF-8 JSON objects as separate files in invoice, purchase order, delivery receipt order. Each object represents one line item and has an `item_id` (a nonblank string) and a `quantity` (a non-negative JSON integer). The invoice and purchase order also have a `unit_price` (a finite, non-negative JSON number). The two prices are assumed to be in the same currency. The program compares prices exactly and prints them as decimal strings.
 
 All item IDs and quantities must agree, and the invoice unit price must equal the purchase order unit price. A missing, null, or invalid required value takes precedence and returns `needs_review`. The result keeps that value as `null` and identifies the affected field. The CLI exits successfully for any of the three decisions. A file it cannot read, invalid JSON, or a top-level value other than an object is a command error.
+
+## License
+
+Matchline is released under the [MIT License](LICENSE). The bundled Inter font is distributed under the [SIL Open Font License 1.1](demo/fonts/OFL.txt).
 
 ## Contact
 
